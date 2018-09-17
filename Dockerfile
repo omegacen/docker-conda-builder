@@ -14,11 +14,10 @@ RUN curl https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -
     /opt/conda/bin/conda config --set show_channel_urls True && \
     /opt/conda/bin/conda update --yes --all && \
     /opt/conda/bin/conda install --yes conda-build conda-verify setuptools && \
-    /opt/conda/bin/conda clean -tipsy
+    /opt/conda/bin/conda clean -tipsy && \
+    ln -s /opt/conda/etc/profile.d/conda.sh /etc/profile.d/conda.sh && \
+    echo ". /opt/conda/etc/profile.d/conda.sh" >> ~/.bashrc && \
+    echo "conda activate base" >> ~/.bashrc
 
-# Add a shell script that activates conda ...
-COPY entrypoint.sh /opt/docker/bin/entrypoint.sh
-# ... and make it the Docker entrypoint so that conda is available when we run a container.
-ENTRYPOINT [ "/bin/bash", "/opt/docker/bin/entrypoint.sh" ]
 # Provide a default command (`bash`), which will start if the user doesn't specify one.
 CMD [ "/bin/bash" ]
