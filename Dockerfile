@@ -3,10 +3,12 @@ FROM centos:7
 LABEL maintainer="teake.nutma@gmail.com"
 LABEL description="Builds linux-64 conda packages. CentOS 7 + dev tools + miniconda."
 
-# Fetch some updates first.
-RUN yum -y update && yum clean all
-# Install GCC and whatnot.
-RUN yum -y group install "Development Tools" && yum clean all
+# Set a UTF-8 locale. Useful for running Python 3 programs.
+ENV LANG=en_US.utf-8 \
+    LC_ALL=en_US.utf-8
+
+# Fetch updates and install GCC and whatnot.
+RUN yum -y update && yum -y group install "Development Tools" && yum clean all
 # Install the latest Miniconda with Python 3 and update everything.
 RUN curl https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -o miniconda.sh && \
     bash miniconda.sh -b -p /opt/conda && \
