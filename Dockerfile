@@ -10,8 +10,9 @@ ENV LANG=en_US.utf-8 \
 # Fetch updates and install dependencies.
 # bzip2 is required for installing conda.
 # git and openssh-clients are required for cloning git repositories in recipes.
+# patch is required for applying patches in recipes.
 RUN yum -y update && \
-    yum -y install bzip2 git openssh-clients && \
+    yum -y install bzip2 git openssh-clients patch && \
     yum clean all && \
     rm -rf /var/cache/yum
 # Install the latest Miniconda with Python 3 and update everything.
