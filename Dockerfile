@@ -20,6 +20,7 @@ RUN curl https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -
     bash miniconda.sh -b -p /opt/conda && \
     rm miniconda.sh && \
     /opt/conda/bin/conda config --set show_channel_urls True && \
+    /opt/conda/bin/conda config --set path_conflict prevent && \
     /opt/conda/bin/conda update --yes --all && \
     /opt/conda/bin/conda install --yes conda-build conda-verify && \
     /opt/conda/bin/conda clean -tipsy && \
