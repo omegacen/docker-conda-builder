@@ -1,7 +1,7 @@
-#!/bin/bash
+#!/bin/sh
 
-# Activate the `base` conda environment.
-. /opt/conda/bin/activate base
+# GitLab runner doesn't source .bashrc, so we do it ourselves.
+. ~/.bashrc
 
 # Run whatever the user wants to.
 exec "$@"
