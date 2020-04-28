@@ -20,13 +20,13 @@ RUN yum -y update \
     && rm -rf /var/cache/yum
 
 # Install the latest Miniconda with Python 3 and update everything.
-RUN curl https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -o miniconda.sh \
+RUN curl https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -o miniconda.sh \
     && sh miniconda.sh -b -p ${CONDA_PREFIX} \
     && rm miniconda.sh \
     && ${CONDA_PREFIX}/bin/conda config --set show_channel_urls True \
     && ${CONDA_PREFIX}/bin/conda config --set path_conflict prevent \
-    && ${CONDA_PREFIX}/bin/conda update --yes --all \
-    && ${CONDA_PREFIX}/bin/conda install --yes conda-build conda-verify \
+    && ${CONDA_PREFIX}/bin/conda update -c conda-forge --yes --all \
+    && ${CONDA_PREFIX}/bin/conda install -c conda-forge --yes conda-build conda-verify coverage coverage-fixpaths \
     && ${CONDA_PREFIX}/bin/conda clean -tipy \
     && ${CONDA_PREFIX}/bin/conda-build purge-all \
     # conda init wants to edit ~/.bashrc, but if that doesn't exist it fails.
