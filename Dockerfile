@@ -25,6 +25,7 @@ RUN curl https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -
     && rm miniconda.sh \
     && ${CONDA_PREFIX}/bin/conda config --set show_channel_urls True \
     && ${CONDA_PREFIX}/bin/conda config --set path_conflict prevent \
+    && ${CONDA_PREFIX}/bin/conda config --set notify_outdated_conda false \
     && ${CONDA_PREFIX}/bin/conda update -c conda-forge --yes --all \
     && ${CONDA_PREFIX}/bin/conda install -c conda-forge --yes conda-build conda-verify coverage coverage-fixpaths \
     && ${CONDA_PREFIX}/bin/conda clean -tipy \
