@@ -39,6 +39,9 @@ RUN curl https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -
     # ensures we're compiling against libraries compatible with the wider
     # conda-forge ecosystem.
     && ${CONDA_PREFIX}/bin/conda config --set conda_build.config_file ${CONDA_PREFIX}/conda_build_config.yaml \
+    # Explicitly fail when overlinking shared libraries. This will prevent dynamic library linking issues,
+    # and will be the default setting in conda build 4.0 anyway.
+    && ${CONDA_PREFIX}/bin/conda config --set conda_build.error_overlinking True \
     # Update and install packages.
     && ${CONDA_PREFIX}/bin/conda update --yes --all \
     && ${CONDA_PREFIX}/bin/conda install --yes conda-build conda-verify coverage coverage-fixpaths conda-forge-pinning=${CONDA_FORGE_PINNING} \
