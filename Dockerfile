@@ -44,7 +44,7 @@ RUN curl https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -
     && ${CONDA_PREFIX}/bin/conda config --set conda_build.error_overlinking True \
     # Update and install packages.
     && ${CONDA_PREFIX}/bin/conda update --yes --all \
-    && ${CONDA_PREFIX}/bin/conda install --yes conda-build conda-verify coverage coverage-fixpaths conda-forge-pinning=${CONDA_FORGE_PINNING} \
+    && ${CONDA_PREFIX}/bin/conda install --yes conda-build conda-verify conda-libmamba-solver mamba boa coverage coverage-fixpaths conda-forge-pinning=${CONDA_FORGE_PINNING} \
     && ${CONDA_PREFIX}/bin/conda clean -tipy \
     && ${CONDA_PREFIX}/bin/conda-build purge-all \
     # conda init wants to edit ~/.bashrc, but if that doesn't exist it fails.
